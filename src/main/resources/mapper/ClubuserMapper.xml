@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsk.backend3.mapper.ClubuserMapper">
+
+    <resultMap id="BaseResultMap" type="com.wsk.backend3.domain.Clubuser">
+            <result property="userid" column="userId" jdbcType="INTEGER"/>
+            <result property="clubid" column="clubId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        userId,clubId
+    </sql>
+
+    <insert id="insertUserToClub">
+        INSERT INTO clubuser(userId, clubId) value ((select userId FROM applytojoin WHERE id = #{id}),(select clubId FROM applytojoin WHERE id = #{id}))
+
+    </insert>
+
+    <select id="findOneByUserIdAndClubId" parameterType="map" resultType="com.wsk.backend3.domain.Clubuser">
+        SELECT *
+        FROM clubuser
+        WHERE userId = #{userId} AND clubId = #{clubId}
+    </select>
+</mapper>

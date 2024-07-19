@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsk.backend3.mapper.ApplytojoinMapper">
+
+    <resultMap id="BaseResultMap" type="com.wsk.backend3.domain.Applytojoin">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userid" column="userId" jdbcType="INTEGER"/>
+            <result property="clubid" column="clubId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,userId,clubId
+    </sql>
+    <select id="findOneByUserIdAndClubId" resultType="com.wsk.backend3.domain.Applytojoin">
+        select *
+        from applytojoin
+        where userId=#{userId} and clubId=#{clubId}
+    </select>
+    <select id="selectPageById" resultType="com.wsk.backend3.domain.Club">
+        select * from club where id in (
+                select clubId
+                from applytojoin
+                where userId = #{userId}
+        )
+    </select>
+</mapper>

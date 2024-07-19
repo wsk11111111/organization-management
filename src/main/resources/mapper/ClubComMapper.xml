@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsk.backend3.mapper.ClubComMapper">
+
+    <resultMap id="BaseResultMap" type="com.wsk.backend3.domain.ClubCom">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userid" column="userId" jdbcType="INTEGER"/>
+            <result property="clubid" column="clubId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,userId,clubId
+    </sql>
+    <select id="selectPageById" resultType="com.wsk.backend3.dto.ClubComDto">
+        select applytojoin.id,stu.true_name ,club.name,club.category from club,club_com,stu,applytojoin
+                 where
+                     club_com.clubId= club.id
+                    and club_com.userId = #{userId}
+                    and club.id =applytojoin.clubId
+                    and applytojoin.userId = stu.id
+    </select>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsk.backend3.mapper.ClubActMapper">
+
+    <resultMap id="BaseResultMap" type="com.wsk.backend3.domain.ClubAct">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="clubId" column="club_id" jdbcType="INTEGER"/>
+            <result property="act" column="act" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,club_id,act
+    </sql>
+    <select id="searchClubAct" resultType="java.lang.String">
+        select act from club_act
+        where club_id = #{id};
+    </select>
+</mapper>
